@@ -6,7 +6,7 @@ from confluent_kafka import Consumer, Producer
 from confluent_kafka.admin import AdminClient, NewTopic
 
 
-BROKER_URL = "PLAINTEXT://localhost:9092"
+BROKER_URL = "PLAINTEXT://localhost:19092"
 TOPIC_NAME = "my-first-python-topic"
 
 
