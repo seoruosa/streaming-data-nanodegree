@@ -18,11 +18,15 @@ class Line:
     def __init__(self, color, station_data, num_trains=10):
         self.color = color
         self.num_trains = num_trains
+        logger.debug(f"before build line")
         self.stations = self._build_line_data(station_data)
+        logger.debug(f"after build line")
         # We must always discount the terminal station at the end of each direction
         self.num_stations = len(self.stations) - 1
+        logger.debug(f"before build trains")
         self.trains = self._build_trains()
-
+        logger.debug(f"after build trains")
+        
     def _build_line_data(self, station_df):
         """Constructs all stations on the line"""
         stations = station_df["station_name"].unique()
@@ -52,15 +56,22 @@ class Line:
         b_dir = True
         for train_id in range(self.num_trains):
             tid = str(train_id).zfill(3)
+            # logger.debug(f"before build train class")
             train = Train(
                 f"{self.color.name[0].upper()}L{tid}", Train.status.in_service
             )
+            # logger.debug(f"after build train class {train}")
+
             trains.append(train)
 
             if b_dir:
+                # logger.debug(f"before arrive b")
                 self.stations[curr_loc].arrive_b(train, None, None)
+                # logger.debug(f"after arrive b")
             else:
+                # logger.debug(f"before arrive a")
                 self.stations[curr_loc].arrive_a(train, None, None)
+                # logger.debug(f"after arrive a")
             curr_loc, b_dir = self._get_next_idx(curr_loc, b_dir)
 
         return trains

@@ -3,4 +3,6 @@ consumers/__pycache__/
 consumers/venv/
 producers/__pycache__/
 producers/models/__pycache__/
+producers/venv/consumers/models/__pycache__/
 producers/venv/
+consumers/models/__pycache__/

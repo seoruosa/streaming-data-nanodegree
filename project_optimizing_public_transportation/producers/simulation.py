@@ -30,12 +30,14 @@ class TimeSimulation:
         self.time_step = time_step
         if self.time_step is None:
             self.time_step = datetime.timedelta(minutes=self.sleep_seconds)
+        # logger.debug("before read data from disk")
 
         # Read data from disk
         self.raw_df = pd.read_csv(
             f"{Path(__file__).parents[0]}/data/cta_stations.csv"
         ).sort_values("order")
 
+        # logger.debug("before create schedule")
         # Define the train schedule (same for all trains)
         self.schedule = schedule
         if schedule is None:
@@ -48,12 +50,13 @@ class TimeSimulation:
                 TimeSimulation.weekdays.sat: {0: TimeSimulation.ten_min_frequency},
                 TimeSimulation.weekdays.sun: {0: TimeSimulation.ten_min_frequency},
             }
-
+        logger.debug("creating train lines")
         self.train_lines = [
             Line(Line.colors.blue, self.raw_df[self.raw_df["blue"]]),
-            Line(Line.colors.red, self.raw_df[self.raw_df["red"]]),
-            Line(Line.colors.green, self.raw_df[self.raw_df["green"]]),
+            # Line(Line.colors.red, self.raw_df[self.raw_df["red"]]),
+            # Line(Line.colors.green, self.raw_df[self.raw_df["green"]]),
         ]
+        logger.debug("train lines created")
 
     def run(self):
         curr_time = datetime.datetime.utcnow().replace(
@@ -61,7 +64,9 @@ class TimeSimulation:
         )
         logger.info("Beginning simulation, press Ctrl+C to exit at any time")
         logger.info("loading kafka connect jdbc source connector")
+        logger.debug(f"before run connector")
         configure_connector()
+        logger.debug("finished connector configuration")
 
         logger.info("beginning cta train simulation")
         weather = Weather(curr_time.month)

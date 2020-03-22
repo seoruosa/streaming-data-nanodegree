@@ -40,3 +40,10 @@ pip install -r requirements.txt
 
 curl -X GET http://localhost:8081/subjects
 curl -X DELETE http://localhost:8081/subjects/com.udacity.station.arrivals-value
+
+
+#### GIT SSH KEY
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/private_key
+ssh -T git@github.com

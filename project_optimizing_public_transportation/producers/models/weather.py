@@ -31,7 +31,7 @@ class Weather(Producer):
 
     def __init__(self, month):
         super().__init__(
-            topic_name="com.udacity.station.arrivals", # TODO: Come up with a better topic name
+            topic_name="org.chicago.cta.weather.v1", # TODO: Come up with a better topic name
             key_schema=Weather.key_schema,
             value_schema=Weather.value_schema,
             num_partitions=5, # TODO
@@ -101,4 +101,4 @@ class Weather(Producer):
         )
         resp.raise_for_status()
 
-        logger.debug(f"sent weather data to kafka, temp: {self.tem}, status: {self.status.name}")
+        logger.debug(f"sent weather data to kafka, temp: {self.temp}, status: {self.status.name}")

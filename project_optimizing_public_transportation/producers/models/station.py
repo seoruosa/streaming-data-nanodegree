@@ -34,14 +34,16 @@ class Station(Producer):
         # replicas
         #
         #
+        # logger.debug(f"before create station class")
         super().__init__(
-            # f"com.udacity.station.{station_name}",
-            topic_name="com.udacity.station.arrivals",
+            # f"com.udacity.station.arrivals.{station_name}",
+            topic_name="org.chicago.cta.station.arrivals.v1",
             key_schema=Station.key_schema,
             value_schema=Station.value_schema, # TODO: Uncomment once schema is defined
             num_partitions=5, # TODO
             num_replicas=1, # TODO
         )
+        # logger.debug(f"after create station class")
 
         self.station_id = int(station_id)
         self.color = color
@@ -61,15 +63,25 @@ class Station(Producer):
         # TODO: Complete this function by producing an arrival message to Kafka
         #
         # logger.info("arrival kafka integration incomplete - skipping")
-        try: 
+        try:
+            v = {
+                #
+                #
+                # TODO: Configure this
+                #
+                "station_id": self.station_id,
+                "train_id": train.train_id,
+                "direction": direction,
+                "line": self.color.name, #
+                "train_status": train.status.name, #take a look at this
+                "prev_station_id": prev_station_id,
+                "prev_direction": prev_direction,
+            }
+            logger.debug(f"before station produce {v}")
             self.producer.produce(
                 topic=self.topic_name,
                 key={"timestamp": self.time_millis()},
                 value={
-                    #
-                    #
-                    # TODO: Configure this
-                    #
                     "station_id": self.station_id,
                     "train_id": train.train_id,
                     "direction": direction,
@@ -79,6 +91,8 @@ class Station(Producer):
                     "prev_direction": prev_direction,
                 },
             )
+        except BufferError as e:
+            logger.debug(f"BUFFER ERROR {e}")
         except Exception as e:
             logger.fatal(e)
             raise(e)

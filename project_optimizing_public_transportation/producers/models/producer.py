@@ -16,7 +16,7 @@ class Producer:
     # Tracks existing topics across all Producer instances
     existing_topics = set([])
     # BROKER_URL = 'http://kafka0:9092'
-    BROKER_URL = 'PLAINTEXT://localhost:9092'
+    BROKER_URL = 'localhost:9092'
     SCHEMA_REGISTRY_URL = "http://localhost:8081"
     # SCHEMA_REGISTRY_URL = "http://schema-registry:8081/"
 
@@ -43,12 +43,14 @@ class Producer:
         
         self.broker_properties = {
             'bootstrap.servers': self.BROKER_URL,
-            'schema.registry.url': self.SCHEMA_REGISTRY_URL
-            # 'on_delivery': lambda report: print(f"succesfully delivered {report}"),
+            'schema.registry.url': self.SCHEMA_REGISTRY_URL,
+            # 'debug': 'broker,topic,msg',
+            'on_delivery': lambda err, report: logger.debug(f"succesfully delivered report"),
             # TODO
         }
 
         # If the topic does not already exist, try to create it
+
         if self.topic_name not in Producer.existing_topics:
             self.create_topic()
             Producer.existing_topics.add(self.topic_name)
@@ -111,8 +113,9 @@ class Producer:
         # if len(Producer.existing_topics)>0:
         #     delete_answer = client.delete_topics(list(Producer.existing_topics))
         # logger.info(f"cleanup code for Producer {delete_answer}")
-        # # logger.info("producer close incomplete - skipping")
+        # logger.info("producer close incomplete - skipping")
         # del self
+        logger.debug('closeeeee')
         if self.producer is not None:
             logger.debug("flushing producer...")
             self.producer.flush()
