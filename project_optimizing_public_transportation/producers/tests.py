@@ -88,8 +88,17 @@ def time_millis():
         """Use this function to get the key for Kafka Events"""
         return int(round(time.time() * 1000))
 
+import pandas as pd
+from pathlib import Path
+
+def verify_station_csv():
+    raw_df = pd.read_csv(
+            f"{Path(__file__).parents[0]}/data/cta_stations.csv"
+        ).sort_values("order")
+    print(raw_df[raw_df['red']])
 if __name__ == '__main__':
-    main()
+    # main()
+    verify_station_csv()
 
 # import time
 # from pathlib import Path

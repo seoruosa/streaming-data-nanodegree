@@ -64,20 +64,20 @@ class Station(Producer):
         #
         # logger.info("arrival kafka integration incomplete - skipping")
         try:
-            v = {
-                #
-                #
-                # TODO: Configure this
-                #
-                "station_id": self.station_id,
-                "train_id": train.train_id,
-                "direction": direction,
-                "line": self.color.name, #
-                "train_status": train.status.name, #take a look at this
-                "prev_station_id": prev_station_id,
-                "prev_direction": prev_direction,
-            }
-            logger.debug(f"before station produce {v}")
+            # v = {
+            #     #
+            #     #
+            #     # TODO: Configure this
+            #     #
+            #     "station_id": self.station_id,
+            #     "train_id": train.train_id,
+            #     "direction": direction,
+            #     "line": self.color.name, #
+            #     "train_status": train.status.name, #take a look at this
+            #     "prev_station_id": prev_station_id,
+            #     "prev_direction": prev_direction,
+            # }
+            # logger.debug(f"before station produce {v}")
             self.producer.produce(
                 topic=self.topic_name,
                 key={"timestamp": self.time_millis()},

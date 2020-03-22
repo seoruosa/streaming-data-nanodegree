@@ -39,7 +39,7 @@ class Turnstile(Producer):
         #
         super().__init__(
             # f"com.udacity.station.turnstile.{station_name}", # TODO: Come up with a better topic name
-            topic_name="org.chicago.cta.station.arrivals.turnstile", # with the previous line we create a lot of topics
+            topic_name="org.chicago.cta.station.turnstile.v1", # with the previous line we create a lot of topics
             key_schema=Turnstile.key_schema,
             value_schema=Turnstile.value_schema, # TODO: Uncomment once schema is defined
             num_partitions=5,

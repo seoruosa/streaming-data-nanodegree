@@ -41,6 +41,10 @@ pip install -r requirements.txt
 curl -X GET http://localhost:8081/subjects
 curl -X DELETE http://localhost:8081/subjects/com.udacity.station.arrivals-value
 
+#### KSQL
+
+curl -sX GET "http://localhost:8088/info"
+curl -sX GET "http://localhost:8088/healthcheck"
 
 #### GIT SSH KEY
 
