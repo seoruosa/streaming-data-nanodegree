@@ -27,7 +27,7 @@ docker exec -it projectoptimizingpublictransportation_kafka0_1 /bin/bash
 kafka-topics --list --zookeeper zookeeper:2181
 kafka-console-producer --topic "my-first-topic" --broker-list PLAINTEXT://kafka0:9092
 kafka-console-consumer --topic "my-test-test-topic" --bootstrap-server PLAINTEXT://kafka0:9092 --from-beginning
-
+kafka-topics --create --topic "org.chicago.cta.station.turnstile.v1" --partitions 1 --replication-factor 1 --zookeeper zookeeper:2181
 
 
 #### Running Simulation
@@ -40,6 +40,7 @@ pip install -r requirements.txt
 
 curl -X GET http://localhost:8081/subjects
 curl -X DELETE http://localhost:8081/subjects/com.udacity.station.arrivals-value
+for i in $(curl -X GET http://localhost:8081/subjects); do echo $i; done
 
 #### KSQL
 

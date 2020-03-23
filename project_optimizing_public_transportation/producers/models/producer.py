@@ -75,23 +75,24 @@ class Producer:
         client = AdminClient({
             'bootstrap.servers': self.broker_properties['bootstrap.servers']
         })
-        new_topics = [NewTopic(
-            topic=self.topic_name,
-            num_partitions=self.num_partitions,
-            replication_factor=self.num_replicas,
-        )]
-        fs = client.create_topics(new_topics)
+        if client.list_topics(timeout=5).topics.get(self.topic_name) is None:   
+            new_topics = [NewTopic(
+                topic=self.topic_name,
+                num_partitions=self.num_partitions,
+                replication_factor=self.num_replicas,
+            )]
+            fs = client.create_topics(new_topics)
 
-        for topic, f in fs.items():
-            try:
-                f.result()  # The result itself is None
-                print(f"Topic {topic} created")
-            except Exception as e:
-                print(f"Failed to create topic {topic}: {e}")
+            for topic, f in fs.items():
+                try:
+                    f.result()  # The result itself is None
+                    print(f"Topic {topic} created")
+                except Exception as e:
+                    print(f"Failed to create topic {topic}: {e}")
 #         check if the Kafka Broker dont have a topic with this name
 
 
-#         if client.list_topics(timeout=5).topics.get(self.topic_name) is None:   
+        # if client.list_topics(timeout=5).topics.get(self.topic_name) is None:   
         # if self.topic_name not in Producer.existing_topics:
         #     topic = NewTopic(self.topic_name, num_partitions=self.num_partitions, replication_factor=self.num_replicas)
         #     client.create_topics([topic])
@@ -115,9 +116,9 @@ class Producer:
         # logger.info(f"cleanup code for Producer {delete_answer}")
         # logger.info("producer close incomplete - skipping")
         # del self
-        logger.debug('closeeeee')
+        # logger.debug('closeeeee')
         if self.producer is not None:
-            logger.debug("flushing producer...")
+            # logger.debug("flushing producer...")
             self.producer.flush()
 
     def time_millis(self):

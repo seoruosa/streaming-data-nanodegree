@@ -34,7 +34,7 @@ class Station(Producer):
         # replicas
         #
         #
-        # logger.debug(f"before create station class")
+        logger.debug(f"before create station topic {station_name}")
         super().__init__(
             # f"com.udacity.station.arrivals.{station_name}",
             topic_name="org.chicago.cta.station.arrivals.v1",
@@ -43,7 +43,7 @@ class Station(Producer):
             num_partitions=5, # TODO
             num_replicas=1, # TODO
         )
-        # logger.debug(f"after create station class")
+        logger.debug(f"after create station topic {station_name}")
 
         self.station_id = int(station_id)
         self.color = color

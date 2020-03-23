@@ -23,7 +23,7 @@ class Line:
         logger.debug(f"after build line")
         # We must always discount the terminal station at the end of each direction
         self.num_stations = len(self.stations) - 1
-        logger.debug(f"before build trains")
+        logger.debug(f"before build trains") # color:{color}\nstation_data:\n{station_data}")
         self.trains = self._build_trains()
         logger.debug(f"after build trains")
         
@@ -56,11 +56,11 @@ class Line:
         b_dir = True
         for train_id in range(self.num_trains):
             tid = str(train_id).zfill(3)
-            # logger.debug(f"before build train class")
+            logger.debug(f"before build train class - train: {self.color.name[0].upper()}L{tid}")
             train = Train(
                 f"{self.color.name[0].upper()}L{tid}", Train.status.in_service
             )
-            # logger.debug(f"after build train class {train}")
+            logger.debug(f"after build train class {train}")
 
             trains.append(train)
 
