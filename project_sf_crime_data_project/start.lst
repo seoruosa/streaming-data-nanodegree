@@ -1,0 +1,21 @@
+           *******************************************************
+                            Listing of SPARK Text
+                              Examiner GPL 2012
+             Copyright (C) 2012 Altran Praxis Limited, Bath, U.K.
+           *******************************************************
+
+
+                        DATE : 25-MAR-2020 01:36:20.30
+
+Line
+   1  conda install -r requirements.txt
+      ^1
+*** (  1)  Syntax Error      : No COMPILATION_UNIT can start with IDENTIFIER.
+--- (  2)  Warning           :430: SLI generation abandoned owing to syntax or 
+           semantic errors or multiple units in a single source file.
+
+
+Note: Flow analysis mode is automatic
+
+
+--End of file--------------------------------------------------

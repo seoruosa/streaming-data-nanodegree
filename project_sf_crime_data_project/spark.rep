@@ -1,0 +1,69 @@
+           *******************************************************
+                         Report of SPARK Examination
+                              Examiner GPL 2012
+             Copyright (C) 2012 Altran Praxis Limited, Bath, U.K.
+           *******************************************************
+
+
+                        DATE : 25-MAR-2020 01:36:20.30
+
+Options:
+    noswitch
+    noindex_file
+    nowarning_file
+    notarget_compiler_data
+    noconfig_file
+    source_extension=ada
+    listing_extension=lst
+    nodictionary_file
+    report_file=spark.rep
+    nohtml
+    nostatistics
+    fdl_identifiers=accept
+    flow_analysis=auto
+    language=95
+    profile=sequential
+    annotation_character=#
+    rules=lazy
+    error_explanations=off
+    justification_option=full
+    output_directory=.
+    output_directory (actual)=/home/intelie/code/streaming-data-nanodegree/project_sf_crime_data_project/
+
+Selected files:
+   start.sh
+
+
+No Index files were used
+
+
+No Meta Files used
+
+
+Full warning reporting selected
+
+
+Source Filename(s) used were:
+   /home/intelie/code/streaming-data-nanodegree/project_sf_crime_data_project/start.sh
+
+
+
+Source Filename:   /home/intelie/code/streaming-data-nanodegree/project_sf_crime_data_project/start.sh
+Listing Filename:  /home/intelie/code/streaming-data-nanodegree/project_sf_crime_data_project/start.lst
+
+***     No units in file
+
+
+2 error(s) or warning(s)
+
+Line
+   1  conda install -r requirements.txt
+      ^1
+*** (  1)  Syntax Error      : No COMPILATION_UNIT can start with IDENTIFIER.
+--- (  2)  Warning           :430: SLI generation abandoned owing to syntax or 
+           semantic errors or multiple units in a single source file.
+
+Note: Automatic flow analysis mode selected
+
+
+--End of file--------------------------------------------------
